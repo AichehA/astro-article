@@ -1,15 +1,32 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+
+const urls = [
+  {
+    titre: "Home",
+    link: import.meta.env.BASE_URL + "/",
+  },
+  {
+    titre: "Blog",
+    link: import.meta.env.BASE_URL + "/blog",
+  },
+  {
+    titre: "About",
+    link: import.meta.env.BASE_URL + "/about",
+  },
+];
 ---
 
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
+      {
+        urls.map((data) => (
+          <HeaderLink href={data.link}>{data.titre}</HeaderLink>
+        ))
+      }
     </div>
     <div class="social-links">
       <a href="https://m.webtoo.ls/@astro" target="_blank">
