@@ -1,0 +1,14 @@
+---
+import { languages } from "@/i18n/ui";
+import { getLink } from "@/i18n/utils";
+---
+
+<ul>
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <li>
+        <a href={getLink(lang)}>{label}</a>
+      </li>
+    ))
+  }
+</ul>

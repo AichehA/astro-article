@@ -1,0 +1,43 @@
+---
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLink,
+  type translate,
+} from "@/i18n/utils";
+
+import HeaderLink from "./HeaderLink.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const urls: { titre: translate; link: string }[] = [
+  {
+    titre: "nav.home",
+    link: getLink(lang, ""),
+  },
+  {
+    titre: "nav.blog",
+    link: getLink(lang, "blog"),
+  },
+  {
+    titre: "nav.about",
+    link: getLink(lang, "about"),
+  },
+];
+---
+
+<ul>
+  {
+    urls.map((data) => (
+      <li>
+        <HeaderLink href={data.link}>{t(data.titre)}</HeaderLink>
+      </li>
+    ))
+  }
+</ul>
+<style>
+  ul {
+    list-style: none;
+  }
+</style>

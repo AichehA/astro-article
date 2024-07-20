@@ -1,32 +1,15 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
-
-const urls = [
-  {
-    titre: "Home",
-    link: import.meta.env.BASE_URL + "/",
-  },
-  {
-    titre: "Blog",
-    link: import.meta.env.BASE_URL + "/blog",
-  },
-  {
-    titre: "About",
-    link: import.meta.env.BASE_URL + "/about",
-  },
-];
+import { SITE_TITLE } from "@/consts";
+import LanguagePicker from "./LanguagePicker.astro";
+import Nav from "./Nav.astro";
 ---
 
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
-      {
-        urls.map((data) => (
-          <HeaderLink href={data.link}>{data.titre}</HeaderLink>
-        ))
-      }
+      <Nav />
+      <LanguagePicker />
     </div>
     <div class="social-links">
       <a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -75,7 +58,8 @@ const urls = [
   h2 a.active {
     text-decoration: none;
   }
-  nav {
+  nav,
+  nav .internal-links {
     display: flex;
     align-items: center;
     justify-content: space-between;
