@@ -1,5 +1,6 @@
 ---
 import FormattedDate from "@/components/FormattedDate.astro";
+import { getLangFromUrl, getLink } from "@/i18n/utils";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import { getCollection } from "astro:content";
 
@@ -14,9 +15,16 @@ export async function getStaticPaths() {
   ];
 }
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+const currentLang = getLangFromUrl(Astro.url);
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.id.includes(currentLang))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+
+const getLinkPost = (slug: string) => {
+  const path = slug.slice(2);
+  return getLink(currentLang, `blog${path}`);
+};
 ---
 
 <DefaultLayout>
@@ -94,8 +102,7 @@ const posts = (await getCollection("blog")).sort(
       {
         posts.map((post) => (
           <li>
-            <pre>{JSON.stringify(post.slug)}</pre>
-            <a href={`${import.meta.env.BASE_URL}/blog/${post.slug}/`}>
+            <a href={getLinkPost(post.slug)}>
               <img
                 width={720}
                 height={360}
