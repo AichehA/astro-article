@@ -3,17 +3,19 @@ import BlogPostLayout from "@/layouts/BlogPostLayout.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const pages = await getCollection("blog");
-  const paths = pages.map((page) => {
-    console.log("slug :", page.slug);
-    const [lang, ...slug] = page.slug.split("/");
+  const articles = await getCollection("articles");
+  const paths = articles.map((article) => {
+    console.log("slug :", article.slug);
+    const [lang, ...slug] = article.slug.split("/");
 
-    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+    return {
+      params: { lang, slug: slug.join("/") || undefined },
+      props: article,
+    };
   });
   return paths;
 }
 
-const { lang, slug } = Astro.params;
 const page = Astro.props;
 
 const { Content } = await page.render();
