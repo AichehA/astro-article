@@ -2,15 +2,6 @@
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 
 export async function getStaticPaths() {
-  //   const pages = await getCollection("blog");
-  //   const paths = pages.map((page) => {
-  //     console.log("slug :", page.slug);
-  //     const [lang, ...slug] = page.slug.split("/");
-
-  //     return { params: { lang, slug: slug.join("/") || undefined }, props: page };
-  //   });
-  // console.log("paths :", paths);
-
   return [
     {
       params: { lang: "fr" },

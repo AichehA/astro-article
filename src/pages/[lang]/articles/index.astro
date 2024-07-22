@@ -7,10 +7,10 @@ import { getCollection } from "astro:content";
 export async function getStaticPaths() {
   return [
     {
-      params: { lang: "fr", slug: "blog" },
+      params: { lang: "fr", slug: "articles" },
     },
     {
-      params: { lang: "en", slug: "blog" },
+      params: { lang: "en", slug: "articles" },
     },
   ];
 }
@@ -21,9 +21,9 @@ const posts = (await getCollection("articles"))
   .filter((post) => post.id.includes(currentLang))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
-const getLinkPost = (slug: string) => {
+const getLinkPost = (slug: string, folder: string) => {
   const path = slug.slice(2);
-  return getLink(currentLang, `blog${path}`);
+  return getLink(currentLang, `${folder}${path}`);
 };
 ---
 
@@ -102,7 +102,7 @@ const getLinkPost = (slug: string) => {
       {
         posts.map((post) => (
           <li>
-            <a href={getLinkPost(post.slug)}>
+            <a href={getLinkPost(post.slug, post.data.folder)}>
               <img
                 width={720}
                 height={360}
