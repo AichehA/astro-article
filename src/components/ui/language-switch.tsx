@@ -43,6 +43,8 @@ export function LanguageSwitch() {
     return potentialPath.includes(getPathDoc(doc.slug, doc.data.folder));
   });
 
+  console.log("getLangs", getLangs);
+
   return (
     <>
       <ul>
