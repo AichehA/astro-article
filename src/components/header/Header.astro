@@ -1,10 +1,7 @@
 ---
 import { SITE_TITLE } from "@/consts";
 import { LanguageSwitch } from "@/ui/language-switch";
-import { getCollection } from "astro:content";
 import Nav from "./Nav.astro";
-
-const articles = await getCollection("articles");
 ---
 
 <header>
@@ -12,11 +9,7 @@ const articles = await getCollection("articles");
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
       <Nav />
-      <LanguageSwitch
-        client:load
-        currentURL={Astro.url.pathname}
-        collectionArticles={articles}
-      />
+      <LanguageSwitch client:load currentURL={Astro.url.pathname} />
     </div>
     <div class="social-links">
       <a href="https://m.webtoo.ls/@astro" target="_blank">
