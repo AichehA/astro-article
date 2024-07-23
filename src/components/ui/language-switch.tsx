@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 
 const langs = appConfig.langs;
 
-export function LanguageSwitch() {
+interface LanguageSwitchProps {
+  currentURL: string;
+}
+
+export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
+  console.log("currentURL", currentURL);
+
   const potentialPath = appConfig.langs.map((lang) => {
-    const slugArray = window.location.pathname
+    const slugArray = currentURL
       .replace(import.meta.env.BASE_URL, "")
       .split("/")
       .splice(2);
@@ -31,7 +37,7 @@ export function LanguageSwitch() {
     fetchData();
   }, []);
 
-  console.log("window.location.pathname", window.location.pathname);
+  // console.log("window.location.pathname", window.location.pathname);
   console.log("potentialPath", potentialPath);
   console.log("allData", allData);
 
