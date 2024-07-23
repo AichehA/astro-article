@@ -1,15 +1,21 @@
 import appConfig from "app.config";
-import { getCollection } from "astro:content";
-import { useEffect, useState } from "react";
+import { type CollectionEntry } from "astro:content";
 
 const langs = appConfig.langs;
 
 interface LanguageSwitchProps {
   currentURL: string;
+  collectionArticles: CollectionEntry<"articles">[];
 }
 
-export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
+export function LanguageSwitch({
+  currentURL,
+  collectionArticles,
+}: LanguageSwitchProps) {
   console.log("currentURL", currentURL);
+  console.log("collectionArticles", collectionArticles);
+
+  // const t: CollectionEntry<"articles"> = [];
 
   const potentialPath = appConfig.langs.map((lang) => {
     const slugArray = currentURL
@@ -25,27 +31,27 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
     return slugArray.join("/");
   };
 
-  const [allData, setAllData] = useState<any[]>([]);
+  // const [allData, setAllData] = useState<CollectionEntry<"articles">[]>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const articles = await getCollection("articles");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const articles = await getCollection("articles");
 
-      setAllData(articles);
-    };
+  //     setAllData(articles);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // console.log("window.location.pathname", window.location.pathname);
   console.log("potentialPath", potentialPath);
-  console.log("allData", allData);
+  // console.log("allData", allData);
 
   /**
    * Permet de filtrer si l'article est disponible dans plusieurs langues.
    * Le résultat des boutons est retourné dans ordre du tableau de configuration "appConfig.langs" fr/using-mdx
    */
-  const getLangs = allData.filter((doc) => {
+  const getLangs = collectionArticles.filter((doc) => {
     return potentialPath.includes(getPathDoc(doc.slug, doc.data.folder));
   });
 
