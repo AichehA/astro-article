@@ -50,14 +50,14 @@ export function LanguageSwitch({
   return (
     <>
       <ul>
-        {/* {collectionArticles
+        {collectionArticles
           .filter((doc) => {
             return potentialPath.includes(
               getPathDoc(doc.slug, doc.data.folder)
             );
           })
           .map((doc) => (
-            <li key={doc.id}>
+            <li>
               <a
                 href={`${import.meta.env.BASE_URL}/${getPathDoc(
                   doc.slug,
@@ -67,7 +67,7 @@ export function LanguageSwitch({
                 {langs.find((lang) => doc.slug.includes(lang))?.toUpperCase()}
               </a>
             </li>
-          ))} */}
+          ))}
         {collectionArticles.map((doc) => (
           <li>{doc.id}</li>
         ))}
