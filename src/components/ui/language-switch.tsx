@@ -50,7 +50,7 @@ export function LanguageSwitch({
   return (
     <>
       <ul>
-        {collectionArticles
+        {/* {collectionArticles
           .filter((doc) => {
             return potentialPath.includes(
               getPathDoc(doc.slug, doc.data.folder)
@@ -67,7 +67,10 @@ export function LanguageSwitch({
                 {langs.find((lang) => doc.slug.includes(lang))?.toUpperCase()}
               </a>
             </li>
-          ))}
+          ))} */}
+        {collectionArticles.map((doc) => (
+          <li>{doc.id}</li>
+        ))}
       </ul>
     </>
   );
