@@ -52,9 +52,14 @@ export function LanguageSwitch({
       <ul>
         {collectionArticles
           .filter((doc) => {
-            return potentialPath.includes(
+            console.log("doc", doc);
+            const result = potentialPath.includes(
               getPathDoc(doc.slug, doc.data.folder)
             );
+
+            console.log("result", result);
+
+            return result;
           })
           .map((doc) => (
             <li>
