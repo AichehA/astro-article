@@ -4,7 +4,10 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
+      "@/ui/*": ["./src/components/ui/*"],
       "@/*": ["./src/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
