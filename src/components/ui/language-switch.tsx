@@ -31,7 +31,9 @@ export function LanguageSwitch() {
     fetchData();
   }, []);
 
-  // console.log("allData", allData);
+  console.log("window.location.pathname", window.location.pathname);
+  console.log("potentialPath", potentialPath);
+  console.log("allData", allData);
 
   /**
    * Permet de filtrer si l'article est disponible dans plusieurs langues.
