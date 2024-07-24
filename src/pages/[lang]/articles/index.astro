@@ -2,17 +2,15 @@
 import FormattedDate from "@/components/FormattedDate.astro";
 import { getLangFromUrl, getLink } from "@/i18n/utils";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
+import appConfig from "app.config";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  return [
-    {
-      params: { lang: "fr", slug: "articles" },
-    },
-    {
-      params: { lang: "en", slug: "articles" },
-    },
-  ];
+  return appConfig.langs.map((lang) => {
+    return {
+      params: { lang, slug: "articles" },
+    };
+  });
 }
 
 const currentLang = getLangFromUrl(Astro.url);
