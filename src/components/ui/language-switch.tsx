@@ -14,8 +14,10 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
       .replace(import.meta.env.BASE_URL, "")
       .split("/")
       .splice(2);
-    return slugArray.length ? lang + "/" + slugArray.join("/") : lang + "/";
+    return slugArray.length ? lang + "/" + slugArray.join("/") : lang;
   });
+
+  console.log("potentialPath", potentialPath);
 
   const getPathDoc = (slug: string, folder: string) => {
     const slugArray = slug.split("/");
