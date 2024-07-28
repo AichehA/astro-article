@@ -89,19 +89,19 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
     });
 
   return (
-    <ul>
+    <>
       {getLangs.map((doc: LanguageSwitchUi) => (
-        <li key={doc.slug}>
-          <a
-            href={doc.href}
-            className={cn(
-              `${currentURL == doc.href ? "font-bold underline" : ""}`
-            )}
-          >
-            {doc.langLabelle}
-          </a>
-        </li>
+        <a
+          key={doc.slug}
+          href={doc.href}
+          className={cn(
+            "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-9 px-4 py-2 ",
+            `${currentURL == doc.href ? "font-bold border-2" : ""}`
+          )}
+        >
+          {doc.langLabelle}
+        </a>
       ))}
-    </ul>
+    </>
   );
 }

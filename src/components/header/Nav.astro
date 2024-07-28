@@ -6,10 +6,13 @@ import {
   type translate,
 } from "@/i18n/utils";
 
-import HeaderLink from "./HeaderLink.astro";
+import { cn } from "@/lib/utils";
 
-const lang = getLangFromUrl(Astro.url);
+const url = Astro.url;
+const lang = getLangFromUrl(url);
 const t = useTranslations(lang);
+
+const subpath = url.pathname.match(/[^\/]+/g);
 
 const urls: { titre: translate; link: string }[] = [
   {
@@ -25,14 +28,33 @@ const urls: { titre: translate; link: string }[] = [
     link: getLink(lang, "about"),
   },
 ];
+
+const isMobile = false; // Transformer en props
+const isActive = (link: string) =>
+  link === url.pathname || link === "/" + subpath?.[0];
 ---
 
-<ul>
+<nav
+  class={cn(
+    isMobile
+      ? "flex flex-col space-y-3 ml-3"
+      : "hidden md:flex md:items-center md:space-x-4 md:text-sm md:font-medium"
+  )}
+>
   {
     urls.map((data) => (
-      <li>
-        <HeaderLink href={data.link}>{t(data.titre)}</HeaderLink>
-      </li>
+      <a
+        href={data.link}
+        class:list={[
+          "transition-colors hover:text-foreground/80 text-foreground/60",
+          {
+            "transition-colors hover:text-foreground/80 text-foreground":
+              isActive(data.link),
+          },
+        ]}
+      >
+        {t(data.titre)}
+      </a>
     ))
   }
-</ul>
+</nav>
