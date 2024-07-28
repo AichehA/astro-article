@@ -1,8 +1,8 @@
 ---
 import {
   getLangFromUrl,
-  useTranslations,
   getLink,
+  useTranslations,
   type translate,
 } from "@/i18n/utils";
 
@@ -36,15 +36,3 @@ const urls: { titre: translate; link: string }[] = [
     ))
   }
 </ul>
-<style>
-  ul {
-    display: flex;
-    list-style: none;
-  }
-  a {
-    padding: 1em 0.5em;
-    color: var(--black);
-    border-bottom: 4px solid transparent;
-    text-decoration: none;
-  }
-</style>
