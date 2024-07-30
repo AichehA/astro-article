@@ -11,6 +11,23 @@ const appConfig = {
     fr: fr,
     en: en,
   },
+  menuNavigation: [
+    {
+      title: "nav.home",
+      link: "",
+      lang: ["fr", "en"],
+    },
+    {
+      title: "nav.articles",
+      link: "articles",
+      lang: ["fr", "en"],
+    },
+    {
+      title: "nav.about",
+      link: "about",
+      lang: ["fr", "en"],
+    },
+  ],
 };
 
 export default appConfig;

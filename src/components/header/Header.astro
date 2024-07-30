@@ -1,13 +1,15 @@
 ---
+import { Navigation } from "@/components/header/navigation";
 import { getLangFromUrl, getLink } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
 import { ColorModeSwitch } from "@/ui/color-mode-switch";
 import { LanguageSwitch } from "@/ui/language-switch";
-import { NavMobile } from "@/ui/nav-mobile";
+import { NavigationMobile } from "@/ui/navigation-mobile";
 import appConfig from "app.config";
-import Nav from "./Nav.astro";
 
-const lang = getLangFromUrl(Astro.url);
+const url = Astro.url;
+const lang = getLangFromUrl(url);
+const pathname = url.pathname;
 ---
 
 <header
@@ -23,20 +25,20 @@ const lang = getLangFromUrl(Astro.url);
       >
         {appConfig.title}
       </a>
-      <LanguageSwitch client:load currentURL={Astro.url.pathname} />
+      <LanguageSwitch client:load currentURL={pathname} />
     </div>
     <div
       class={cn(
         "flex flex-1 items-center justify-between space-x-2 md:justify-end"
       )}
     >
-      <NavMobile client:load />
-      <!-- {navigation({
-            currentLang: getCurrentLang,
-            currentSlug: getCurrentSlug,
-            callBack: () => {},
-          })} -->
-      <Nav />
+      <NavigationMobile client:load currentLang={lang} currentSlug={pathname} />
+      <Navigation
+        client:load
+        currentLang={lang}
+        currentSlug={pathname}
+        isMobile={false}
+      />
       <div class={cn("flex flex-1 items-center md:flex-initial")}>
         <!-- <Search class={cn("w-full md:w-auto")} /> -->
         <ColorModeSwitch client:load />

@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { useEffect, useState } from "react";
 
 const langs = appConfig.langs;
+const defaultLang = appConfig.defaultLang;
 
 interface LanguageSwitchProps {
   currentURL: string;
@@ -17,11 +18,11 @@ interface DocInfo {
 interface LanguageSwitchUi {
   slug: string;
   href: string;
-  langLabelle: string | undefined;
+  lang: string;
 }
 
 export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
-  const potentialPath = appConfig.langs.map((lang) => {
+  const potentialPath = langs.map((lang) => {
     const slugArray = currentURL
       .replace(import.meta.env.BASE_URL, "")
       .split("/")
@@ -82,11 +83,12 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
       return {
         slug: doc.slug,
         href: href(doc),
-        langLabelle: langs
-          .find((lang) => doc.slug.includes(lang))
-          ?.toUpperCase(),
+        lang: langs.find((lang) => doc.slug.includes(lang)) || defaultLang,
       };
-    });
+    })
+    .sort(
+      (langA, langB) => langs.indexOf(langA.lang) - langs.indexOf(langB.lang)
+    );
 
   return (
     <>
@@ -99,7 +101,7 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
             `${currentURL == doc.href ? "font-bold border-2" : ""}`
           )}
         >
-          {doc.langLabelle}
+          {doc.lang.toUpperCase()}
         </a>
       ))}
     </>
