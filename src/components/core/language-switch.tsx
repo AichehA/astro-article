@@ -1,19 +1,10 @@
+import { getPathDoc, href, useAllDocs, type DocInfo } from "@/lib/useDocs";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
-import { getCollection } from "astro:content";
 import { useEffect, useState } from "react";
 
 const langs = appConfig.langs;
 const defaultLang = appConfig.defaultLang;
-
-interface LanguageSwitchProps {
-  currentURL: string;
-}
-
-interface DocInfo {
-  slug: string;
-  folder: string;
-}
 
 interface LanguageSwitchUi {
   slug: string;
@@ -21,57 +12,21 @@ interface LanguageSwitchUi {
   lang: string;
 }
 
-export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
+export function LanguageSwitch() {
+  const currentPathname = window.location.pathname;
   const potentialPath = langs.map((lang) => {
-    const slugArray = currentURL
+    const slugArray = currentPathname
       .replace(import.meta.env.BASE_URL, "")
       .split("/")
       .splice(2);
     return slugArray.length ? lang + "/" + slugArray.join("/") : lang;
   });
 
-  const getPathDoc = ({ slug, folder }: DocInfo) => {
-    const slugArray = slug.split("/");
-    if (folder) {
-      slugArray.splice(1, 0, folder);
-    }
-    return slugArray.join("/");
-  };
-
   const [allDoc, setAllDoc] = useState<DocInfo[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const articles: DocInfo[] = (await getCollection("articles")).map(
-        (doc) => {
-          return {
-            slug: doc.slug,
-            folder: doc.data.folder,
-          };
-        }
-      );
-      const pages: DocInfo[] = (await getCollection("pages")).map((doc) => {
-        return {
-          slug: doc.slug,
-          folder: doc.data.folder,
-        };
-      });
-
-      setAllDoc([...articles, ...pages]);
-    };
-
-    fetchData();
+    useAllDocs().then((docs) => setAllDoc(docs));
   }, []);
-
-  /**
-   * Retourne l'url par rapport au document passer en paramètre
-   *
-   * @param doc Le document
-   * @returns L'url au format "string"
-   */
-  const href = (doc: DocInfo) => {
-    return `${import.meta.env.BASE_URL}/${getPathDoc(doc)}`;
-  };
 
   /**
    * Permet de filtrer si l'article est disponible dans plusieurs langues.
@@ -98,7 +53,7 @@ export function LanguageSwitch({ currentURL }: LanguageSwitchProps) {
           href={doc.href}
           className={cn(
             "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-9 px-4 py-2 ",
-            `${currentURL == doc.href ? "font-bold border-2" : ""}`
+            `${currentPathname == doc.href ? "font-bold border-2" : ""}`
           )}
         >
           {doc.lang.toUpperCase()}

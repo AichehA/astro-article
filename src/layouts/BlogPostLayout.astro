@@ -8,7 +8,7 @@ import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"articles">["data"];
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url.pathname);
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---

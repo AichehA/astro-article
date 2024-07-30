@@ -1,10 +1,8 @@
-import { getLink, useTranslations, type langs } from "@/i18n/utils";
+import { getLangFromUrl, getLink, useTranslations } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
 
 interface NavigationProps {
-  currentLang: langs;
-  currentSlug: string;
   isMobile: boolean;
 }
 
@@ -16,11 +14,9 @@ interface routerModel {
 
 const router: routerModel[] = appConfig.menuNavigation;
 
-export function Navigation({
-  currentLang,
-  currentSlug,
-  isMobile = false,
-}: NavigationProps) {
+export function Navigation({ isMobile = false }: NavigationProps) {
+  const currentPathname = window.location.pathname;
+  const currentLang = getLangFromUrl(currentPathname);
   const t = useTranslations(currentLang);
 
   return (
@@ -38,7 +34,7 @@ export function Navigation({
             key={index}
             className={cn(
               "transition-colors hover:text-foreground/80 text-foreground/60",
-              getLink(currentLang, value.link) === currentSlug
+              getLink(currentLang, value.link) === currentPathname
                 ? "transition-colors hover:text-foreground/80 text-foreground"
                 : ""
             )}

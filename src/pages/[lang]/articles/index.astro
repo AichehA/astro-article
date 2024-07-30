@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   });
 }
 
-const currentLang = getLangFromUrl(Astro.url);
+const currentLang = getLangFromUrl(Astro.url.pathname);
 
 const posts = (await getCollection("articles"))
   .filter((post) => post.id.includes(currentLang))

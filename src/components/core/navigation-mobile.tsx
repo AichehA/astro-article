@@ -8,20 +8,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui-shadcn/sheet";
-import type { langs } from "@/i18n/utils";
+import { getLangFromUrl, getLink } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
 import * as React from "react";
 
-interface NavigationMobileProps {
-  currentLang: langs;
-  currentSlug: string;
-}
-
-export function NavigationMobile({
-  currentLang,
-  currentSlug,
-}: NavigationMobileProps) {
+export function NavigationMobile() {
+  const currentPathname = window.location.pathname;
+  const currentLang = getLangFromUrl(currentPathname);
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -40,20 +34,19 @@ export function NavigationMobile({
         </SheetTitle>
         <SheetContent side="left">
           <SheetHeader>
-            <a href="/" className={cn("space-x-2 font-bold")}>
+            <a
+              href={getLink(currentLang)}
+              className={cn("space-x-2 font-bold")}
+            >
               {appConfig.title}
             </a>
             <SheetClose asChild>
               <div className="flex">
-                <LanguageSwitch currentURL={currentSlug} />
+                <LanguageSwitch />
               </div>
             </SheetClose>
           </SheetHeader>
-          <Navigation
-            currentLang={currentLang}
-            currentSlug={currentSlug}
-            isMobile={true}
-          />
+          <Navigation isMobile={true} />
         </SheetContent>
       </Sheet>
     </>
