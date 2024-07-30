@@ -4,7 +4,8 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@/ui/*": ["./src/components/ui/*"],
+      "@/ui-shadcn/*": ["./src/components/ui-shadcn/*"],
+      "@/utils/*": ["src/components/utils/*"],
       "@/*": ["./src/*"]
     },
     "jsx": "react-jsx",

@@ -1,10 +1,10 @@
 ---
-import { Navigation } from "@/components/header/navigation";
+import { ColorModeSwitch } from "@/components/core/color-mode-switch";
+import { LanguageSwitch } from "@/components/core/language-switch";
+import { Navigation } from "@/components/core/navigation";
+import { NavigationMobile } from "@/components/core/navigation-mobile";
 import { getLangFromUrl, getLink } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
-import { ColorModeSwitch } from "@/ui/color-mode-switch";
-import { LanguageSwitch } from "@/ui/language-switch";
-import { NavigationMobile } from "@/ui/navigation-mobile";
 import appConfig from "app.config";
 
 const url = Astro.url;

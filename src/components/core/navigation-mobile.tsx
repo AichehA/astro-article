@@ -1,4 +1,5 @@
-import { Navigation } from "@/components/header/navigation";
+import { LanguageSwitch } from "@/components/core/language-switch";
+import { Navigation } from "@/components/core/navigation";
 import {
   Sheet,
   SheetClose,
@@ -9,7 +10,6 @@ import {
 } from "@/components/ui-shadcn/sheet";
 import type { langs } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
-import { LanguageSwitch } from "@/ui/language-switch";
 import appConfig from "app.config";
 import * as React from "react";
 

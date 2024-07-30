@@ -3,7 +3,7 @@ import fr from "langs/fr";
 
 const appConfig = {
   title: "Mon site",
-  copyright: "© 2023 - Mon site",
+  copyright: "© 2024 - Mon site",
   email: "your-email@example.com",
   defaultLang: "fr" as const,
   langs: ["fr", "en"],
@@ -26,6 +26,20 @@ const appConfig = {
       title: "nav.about",
       link: "about",
       lang: ["fr", "en"],
+    },
+  ],
+  socials: [
+    {
+      link: "https://twitter.com/damienaicheh",
+      type: "Twitter",
+    },
+    {
+      link: "https://github.com/damienaicheh",
+      type: "Github",
+    },
+    {
+      link: "https://www.youtube.com/@damienaicheh",
+      type: "Youtube",
     },
   ],
 };
