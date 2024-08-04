@@ -1,7 +1,7 @@
-import { getPathDoc, href, useAllDocs, type DocInfo } from "@/lib/useDocs";
+import { getPathDoc, href, useAllDocs, type DocInfo } from "@/lib/use-docs";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
-import { useEffect, useState } from "react";
+import * as React from "react";
 
 const langs = appConfig.langs;
 const defaultLang = appConfig.defaultLang;
@@ -22,9 +22,9 @@ export function LanguageSwitch() {
     return slugArray.length ? lang + "/" + slugArray.join("/") : lang;
   });
 
-  const [allDoc, setAllDoc] = useState<DocInfo[]>([]);
+  const [allDoc, setAllDoc] = React.useState<DocInfo[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     useAllDocs().then((docs) => setAllDoc(docs));
   }, []);
 

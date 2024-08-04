@@ -1,4 +1,4 @@
-import { Icons } from "@/components/utils/icons";
+import { Icons } from "@/components/core/icons";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
 

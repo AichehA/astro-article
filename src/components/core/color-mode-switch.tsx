@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui-shadcn/button";
-import { Icons } from "@/components/utils/icons";
+import { Icons } from "@/components/core/icons";
 import * as React from "react";
 
 export function ColorModeSwitch() {

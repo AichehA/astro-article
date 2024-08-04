@@ -18,6 +18,6 @@ const pageHomeEntry = await getEntry("pages", `${lang}`);
 const { Content } = await pageHomeEntry!.render();
 ---
 
-<DefaultLayout>
+<DefaultLayout mode="home">
   <Content />
 </DefaultLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
+import { PageHeader } from "@/components/core/page-header";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
@@ -11,12 +12,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  mode?: "home" | "post";
 }
 
 const {
   title = SITE_TITLE,
   description = SITE_DESCRIPTION,
-  image = `${import.meta.env.BASE_URL}/blog-placeholder-1.jpg`,
+  image = `background_1.jpg`,
+  mode = "post",
 } = Astro.props;
 ---
 
@@ -27,8 +30,16 @@ const {
   </head>
   <body>
     <Header />
-    <main>
-      <slot />
+    <main class="min-h-screen">
+      <PageHeader
+        heading={title}
+        text={description}
+        cover={image}
+        mode={mode}
+      />
+      <div class="container">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

@@ -11,9 +11,8 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
+      padding: {
+        DEFAULT: "1rem",
       },
     },
     extend: {
@@ -30,6 +29,7 @@ export default {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          opacity: "hsla(var(--secondary-opacity))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -50,6 +50,9 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        shadow: {
+          DEFAULT: "hsl(var(--shadow))",
         },
       },
       borderRadius: {

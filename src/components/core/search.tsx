@@ -1,5 +1,5 @@
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import { href, useAllDocs, type DocInfo } from "@/lib/useDocs";
+import { href, useAllDocs, type DocInfo } from "@/lib/use-docs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui-shadcn/button";
 import {
@@ -37,8 +37,6 @@ export function Search({ className }) {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  console.log("allDoc :", allDoc);
-
   return (
     <>
       <Button
@@ -62,8 +60,6 @@ export function Search({ className }) {
                 ).includes(search.toLowerCase());
               })
               .map((doc) => {
-                console.log(doc.slug);
-
                 return href(doc);
               });
             if (idDocArray.includes(itemId)) return 1;
