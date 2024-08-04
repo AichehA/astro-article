@@ -13,11 +13,14 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 
-const pageHomeEntry = await getEntry("pages", `${lang}/about`);
+const pageEntry = await getEntry("pages", `${lang}/about`);
 
-const { Content } = await pageHomeEntry!.render();
+const { Content } = await pageEntry!.render();
 ---
 
-<DefaultLayout>
+<DefaultLayout
+  title={pageEntry?.data.title}
+  description={pageEntry?.data.description}
+>
   <Content />
 </DefaultLayout>

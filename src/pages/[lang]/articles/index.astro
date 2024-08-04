@@ -3,6 +3,7 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import { getLangFromUrl, getLink } from "@/i18n/utils";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import appConfig from "app.config";
+import { getEntry } from "astro:content";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -15,6 +16,8 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromUrl(Astro.url.pathname);
 
+const pageEntry = await getEntry("pages", `${currentLang}/articles`);
+
 const posts = (await getCollection("articles"))
   .filter((post) => post.id.includes(currentLang))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
@@ -25,7 +28,10 @@ const getLinkPost = (slug: string, folder: string) => {
 };
 ---
 
-<DefaultLayout>
+<DefaultLayout
+  title={pageEntry?.data.title}
+  description={pageEntry?.data.description}
+>
   <section>
     <ul>
       {
