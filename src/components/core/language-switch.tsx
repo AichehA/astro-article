@@ -38,7 +38,7 @@ export function LanguageSwitch() {
       return {
         slug: doc.slug,
         href: href(doc),
-        lang: langs.find((lang) => doc.slug.includes(lang)) || defaultLang,
+        lang: doc.lang ? doc.lang : defaultLang,
       };
     })
     .sort(

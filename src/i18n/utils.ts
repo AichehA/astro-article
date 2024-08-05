@@ -26,3 +26,8 @@ export function getLink(lang: string, name?: string) {
 
   return import.meta.env.BASE_URL + path;
 }
+
+export function getLinkPost(currentLang: string, slug: string, folder: string) {
+  const path = slug.slice(2);
+  return getLink(currentLang, `${folder}${path}`);
+}

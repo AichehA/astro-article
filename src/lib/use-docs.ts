@@ -1,3 +1,4 @@
+import appConfig from "app.config";
 import { getCollection } from "astro:content";
 
 export interface DocInfo {
@@ -6,6 +7,9 @@ export interface DocInfo {
   body: string;
   slug: string;
   folder: string;
+  lang: string | null;
+  pubDate: Date;
+  cover?: string;
 }
 
 export async function useAllDocs(): Promise<DocInfo[]> {
@@ -19,6 +23,9 @@ export async function useAllDocs(): Promise<DocInfo[]> {
       body: doc.body,
       slug: doc.slug,
       folder: doc.data.folder,
+      lang: appConfig.langs.find((lang) => doc.id.includes(lang)) || null,
+      pubDate: doc.data.pubDate,
+      cover: doc.data.cover,
     }))
   );
 }

@@ -1,6 +1,6 @@
 ---
 import FormattedDate from "@/components/FormattedDate.astro";
-import { getLangFromUrl, getLink } from "@/i18n/utils";
+import { getLangFromUrl, getLinkPost } from "@/i18n/utils";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import appConfig from "app.config";
 import { getEntry } from "astro:content";
@@ -21,11 +21,6 @@ const pageEntry = await getEntry("pages", `${currentLang}/articles`);
 const posts = (await getCollection("articles"))
   .filter((post) => post.id.includes(currentLang))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
-
-const getLinkPost = (slug: string, folder: string) => {
-  const path = slug.slice(2);
-  return getLink(currentLang, `${folder}${path}`);
-};
 ---
 
 <DefaultLayout
@@ -37,11 +32,11 @@ const getLinkPost = (slug: string, folder: string) => {
       {
         posts.map((post) => (
           <li>
-            <a href={getLinkPost(post.slug, post.data.folder)}>
+            <a href={getLinkPost(currentLang, post.slug, post.data.folder)}>
               <img
                 width={720}
                 height={360}
-                src={`${import.meta.env.BASE_URL}${post.data.heroImage}`}
+                src={`${import.meta.env.BASE_URL}${post.data.cover}`}
                 alt=""
               />
               <h4 class="title">{post.data.title}</h4>

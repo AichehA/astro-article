@@ -23,7 +23,7 @@ export function Search({ className }) {
 
   React.useEffect(() => {
     useAllDocs()
-      .then((docs) => docs.filter((doc) => doc.slug.includes(currentLang)))
+      .then((docs) => docs.filter((doc) => doc.lang === currentLang))
       .then((doc) => setAllDoc(doc));
 
     const down = (e: KeyboardEvent) => {

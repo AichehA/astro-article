@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
 import { PostsDateAndReadTime } from "./posts-date-read";
+import * as React from "react";
+import { useAllDocs, type DocInfo } from "@/lib/use-docs";
+import { getLangFromUrl, getLink, getLinkPost } from "@/i18n/utils";
 
 interface PostsProps {
   children?: React.ReactNode;
@@ -15,14 +18,22 @@ export function Posts({
   allPostsTitle,
   allPostsBtn,
 }: PostsProps) {
-  const allDocs: any[] = [];
-  const getCurrentLang = "fr";
+  const [allDoc, setAllDoc] = React.useState<DocInfo[]>([]);
 
-  const allData = allDocs.filter((data) => data.lang === getCurrentLang);
+  React.useEffect(() => {
+    useAllDocs().then((docs) => setAllDoc(docs));
+  }, []);
+
+  const currentPathname = window.location.pathname;
+  const currentLang = getLangFromUrl(currentPathname);
+
+  const allData = allDoc.filter((data) => data.lang === currentLang);
   const features = allData
-    .filter((docs) => docs._id.includes("index") === false)
+    .filter((docs) => docs.folder.length !== 0)
     .sort((docA, docB) => {
-      return new Date(docB.date).valueOf() - new Date(docA.date).valueOf();
+      return (
+        new Date(docB.pubDate).valueOf() - new Date(docA.pubDate).valueOf()
+      );
     })
     .slice(0, 5);
 
@@ -39,7 +50,7 @@ export function Posts({
           {featuredPostTitle}
         </h2>
         {firstFeatures
-          ? FeaturePostsDocs(firstFeatures, featuredPostBtn, getCurrentLang)
+          ? FeaturePostsDocs(firstFeatures, featuredPostBtn, currentLang)
           : null}
       </section>
       <section className="flex flex-col items-stretch max-md:w-full max-md:ml-0 mt-10">
@@ -51,11 +62,11 @@ export function Posts({
           {allPostsTitle}
         </h2>
         <div className="flex grow flex-col items-stretch max-md:max-w-full md:flex-row md:flex-wrap gap-2 lg:gap-4 md:justify-between">
-          {features.map((doc) => PostsDocs(doc, getCurrentLang))}
+          {features.map((doc) => PostsDocs(doc, currentLang))}
         </div>
         <div className="flex justify-center items-center mt-4 mb-4">
           <a
-            href={`${getCurrentLang}/articles`}
+            href={getLinkPost(currentLang, "fr", "articles")}
             title={"all docs"}
             className={cn(
               "text-lg font-bold leading-6 px-16 py-4 self-start inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90"
@@ -70,7 +81,7 @@ export function Posts({
 }
 
 function FeaturePostsDocs(
-  doc: any,
+  doc: DocInfo,
   featuredPostBtn: string,
   currentLang: string
 ) {
@@ -80,7 +91,7 @@ function FeaturePostsDocs(
         <div className="flex flex-col items-stretch w-[45%] max-md:w-full max-md:ml-0">
           <img
             className="aspect-[1.50] object-cover object-center w-full overflow-hidden grow max-md:max-w-full"
-            src={doc.cover}
+            src={`${import.meta.env.BASE_URL}${doc.cover}`}
             alt="Next.js Logo"
             width={1500}
             height={1500}
@@ -99,7 +110,7 @@ function FeaturePostsDocs(
           </p>
         </div>
         <a
-          href={doc.slug}
+          href={getLinkPost(currentLang, doc.slug, doc.folder)}
           title={doc.title}
           className={cn(
             "text-lg font-bold leading-6 mt-9 px-10 py-4 self-start max-md:px-5 inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90"
@@ -112,13 +123,13 @@ function FeaturePostsDocs(
   );
 }
 
-function PostsDocs(doc: any, currentLang: string) {
+function PostsDocs(doc: DocInfo, currentLang: string) {
   return (
     <a
       className="border border-muted-foreground flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground md:w-[49%]"
       href={doc.slug}
       title={doc.title}
-      key={doc._id}
+      key={doc.slug}
     >
       {PostsDateAndReadTime(doc, currentLang)}
       <h3 className="text-2xl font-bold leading-8">{doc.title}</h3>
