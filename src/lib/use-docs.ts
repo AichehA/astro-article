@@ -1,3 +1,4 @@
+import { useBodyToMinutes } from "@/lib/use-reading-time";
 import appConfig from "app.config";
 import { getCollection } from "astro:content";
 
@@ -10,8 +11,14 @@ export interface DocInfo {
   lang: string | null;
   pubDate: Date;
   cover?: string;
+  readTime: number;
 }
 
+/**
+ * Permet de récupérer tout les documents
+ *
+ * @returns {Promise<DocInfo[]>}
+ */
 export async function useAllDocs(): Promise<DocInfo[]> {
   return Promise.all([
     await getCollection("pages"),
@@ -26,11 +33,19 @@ export async function useAllDocs(): Promise<DocInfo[]> {
       lang: appConfig.langs.find((lang) => doc.id.includes(lang)) || null,
       pubDate: doc.data.pubDate,
       cover: doc.data.cover,
+      readTime: useBodyToMinutes(doc.body),
     }))
   );
 }
 
-export const getPathDoc = ({ slug, folder }: DocInfo) => {
+/**
+ * Récupérer le chemin du document
+ *
+ * @param {string} slug
+ * @param {string} folder
+ * @returns {string} Retourne la nouvelle url
+ */
+export const getPathDoc = ({ slug, folder }: DocInfo): string => {
   const slugArray = slug.split("/");
   if (folder) {
     slugArray.splice(1, 0, folder);
@@ -41,8 +56,8 @@ export const getPathDoc = ({ slug, folder }: DocInfo) => {
 /**
  * Retourne l'url par rapport au document passer en paramètre
  *
- * @param doc Le document
- * @returns L'url au format "string"
+ * @param {DocInfo} doc Le document
+ * @returns {string} L'url au format "string"
  */
 export const href = (doc: DocInfo) => {
   return `${import.meta.env.BASE_URL}/${getPathDoc(doc)}`;

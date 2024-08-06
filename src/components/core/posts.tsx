@@ -127,7 +127,7 @@ function PostsDocs(doc: DocInfo, currentLang: string) {
   return (
     <a
       className="border border-muted-foreground flex flex-col p-4 md:p-6 items-start max-md:max-w-full bg-card hover:bg-card/70 text-card-foreground md:w-[49%]"
-      href={doc.slug}
+      href={getLinkPost(currentLang, doc.slug, doc.folder)}
       title={doc.title}
       key={doc.slug}
     >

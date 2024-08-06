@@ -12,7 +12,7 @@ export function PostsDateAndReadTime(doc: DocInfo, currentLang: string) {
       </span>
       <span className="flex items-center mb-4">
         <Icons.hourglass className="mr-1" width={20} height={20} />
-        {useReadingTimeToNumeric("1")}{" "}
+        {useReadingTimeToNumeric(doc.readTime)}{" "}
       </span>
     </div>
   );
