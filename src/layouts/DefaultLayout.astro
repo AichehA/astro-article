@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/core/page-header";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
-import { getLangFromUrl } from "@/i18n/utils";
+import { getLangFromUrl } from "@/lib/use-i18n";
 
 const lang = getLangFromUrl(Astro.url.pathname);
 

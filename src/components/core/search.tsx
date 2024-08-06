@@ -1,4 +1,4 @@
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getLangFromUrl, useTranslations } from "@/lib/use-i18n";
 import { href, useAllDocs, type DocInfo } from "@/lib/use-docs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui-shadcn/button";

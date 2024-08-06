@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui-shadcn/sheet";
-import { getLangFromUrl, getLink } from "@/i18n/utils";
+import { getLangFromUrl, getLink } from "@/lib/use-i18n";
 import { cn } from "@/lib/utils";
 import appConfig from "app.config";
 import * as React from "react";

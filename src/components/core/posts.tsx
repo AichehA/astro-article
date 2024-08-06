@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { PostsDateAndReadTime } from "./posts-date-read";
 import * as React from "react";
 import { useAllDocs, type DocInfo } from "@/lib/use-docs";
-import { getLangFromUrl, getLink, getLinkPost } from "@/i18n/utils";
+import { getLangFromUrl, getLinkPost } from "@/lib/use-i18n";
 
 interface PostsProps {
   children?: React.ReactNode;
