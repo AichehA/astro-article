@@ -1,9 +1,25 @@
 ---
-import H1 from "@/components/mdx-components/title/H1.astro";
-import H2 from "@/components/mdx-components/title/H2.astro";
+import Table from "@/components/mdx-components/table/Table.astro";
+import TableTd from "@/components/mdx-components/table/TableTd.astro";
+import TableTh from "@/components/mdx-components/table/TableTh.astro";
+import TableTr from "@/components/mdx-components/table/TableTr.astro";
+import TitleH1 from "@/components/mdx-components/title/TitleH1.astro";
+import TitleH2 from "@/components/mdx-components/title/TitleH2.astro";
+import TitleH3 from "@/components/mdx-components/title/TitleH3.astro";
+import TitleH4 from "@/components/mdx-components/title/TitleH4.astro";
+import TitleH5 from "@/components/mdx-components/title/TitleH5.astro";
+import TitleH6 from "@/components/mdx-components/title/TitleH6.astro";
 
 export const components = {
-  h1: H1,
-  h2: H2,
+  h1: TitleH1,
+  h2: TitleH2,
+  h3: TitleH3,
+  h4: TitleH4,
+  h5: TitleH5,
+  h6: TitleH6,
+  table: Table,
+  tr: TableTr,
+  th: TableTh,
+  td: TableTd,
 };
 ---
