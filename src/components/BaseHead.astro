@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import "@/styles/global.css";
+import "katex/dist/katex.min.css";
 
 interface Props {
   title: string;
@@ -21,8 +22,8 @@ const {
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/astro-article/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/astro-article/favicon.svg" />
 
 <!-- Font preloads -->
 <link

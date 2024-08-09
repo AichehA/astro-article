@@ -1,0 +1,33 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
+
+const titleVariants = cva("scroll-m-20 tracking-tight", {
+  variants: {
+    variant: {
+      h1: "mt-2 text-4xl font-bold",
+      h2: "mt-10 border-b pb-1 text-3xl font-semibold first:mt-0",
+      h3: "mt-8 text-2xl font-semibold",
+      h4: "mt-8 text-xl font-semibold",
+      h5: "mt-8 text-lg font-semibold",
+      h6: "mt-8 text-base font-semibold",
+    },
+  },
+  defaultVariants: {
+    variant: "h1",
+  },
+});
+
+export interface Props
+  extends HTMLAttributes<"h1" | "h2" | "h3" | "h4" | "h5" | "h6">,
+    VariantProps<typeof titleVariants> {}
+
+const { variant = "h1" } = Astro.props;
+
+const Comp = variant ? variant : "h1";
+---
+
+<Comp class={cn(titleVariants({ variant }))}>
+  <slot />
+</Comp>

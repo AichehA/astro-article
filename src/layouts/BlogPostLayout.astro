@@ -1,9 +1,11 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
+import { PageHeader } from "@/components/core/page-header";
 import Footer from "@/components/Footer.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import Header from "@/components/Header.astro";
 import { getLangFromUrl } from "@/lib/use-i18n";
+import { cn } from "@/lib/utils";
 import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"articles">["data"];
@@ -21,38 +23,22 @@ const { title, description, pubDate, updatedDate, cover } = Astro.props;
 
   <body>
     <Header />
-    <main>
-      <article>
-        <div class="hero-image">
-          {
-            cover && (
-              <img
-                width={1020}
-                height={510}
-                src={`${import.meta.env.BASE_URL}${cover}`}
-                alt=""
-              />
-            )
-          }
-        </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
-            <hr />
+    <main class="min-h-screen">
+      <PageHeader heading={title} text={description} cover={cover} />
+      <div class="container mt-4">
+        <div class="flex md:gap-4">
+          <div class={cn("mx-auto min-w-0 w-full xl:w-[75%]")}>
+            <slot />
           </div>
-          <slot />
+          <div class="hidden text-sm xl:block w-[25%]">
+            <div
+              class="sticky top-16 max-h-[calc(var(--vh)-4rem)] overflow-y-auto"
+            >
+              <p>toc</p>
+            </div>
+          </div>
         </div>
-      </article>
+      </div>
     </main>
     <Footer />
   </body>

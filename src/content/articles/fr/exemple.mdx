@@ -1,0 +1,269 @@
+---
+title: 'Exemple MDX'
+description: 'Lorem ipsum dolor sit amet exemple'
+pubDate: '2024-01-25'
+cover: '/blog-placeholder-5.jpg'
+---
+
+```js title="my-test-file.js"
+console.log('Title attribute example')
+```
+
+
+```html
+<!-- src/content/index.html -->
+<div>File name comment example</div>
+```
+
+
+```js title="line-markers.js" del={2} ins={3-4} {6}
+function demo() {
+  console.log('this line is marked as deleted')
+  // This line and the next one are marked as inserted
+  console.log('this is the second inserted line')
+
+  return 'this line uses the neutral default marker type'
+}
+```
+
+## KaTeX Demo
+
+$$
+I = \int_0^{2\pi} \sin(x)\,dx
+$$
+
+
+
+
+Soit $f\colon[a,b]\to\R$ est une intégrale de Riemann. Soit $F\colon[a,b]\to\R$ est
+$F(x)=\int_{a}^{x} f(t)\,dt$. Alors $F$ est continue, et pour tout $x$ tel que
+$f$ est continue à $x$, $F$ est différentiable à $x$ avec $F'(x)=f(x)$.
+
+# Hello Equations!
+
+When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
+$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
+
+## Maxwell's Equations
+
+| equation                                                                                                                                                                  | description                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| $\nabla \cdot \vec{\mathbf{B}}  = 0$                                                                                                                                      | divergence of $\vec{\mathbf{B}}$ is zero                                               |
+| $\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t}  = \vec{\mathbf{0}}$                                                          | curl of $\vec{\mathbf{E}}$ is proportional to the rate of change of $\vec{\mathbf{B}}$ |
+| $\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} = \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} = 4 \pi \rho$ | _wha?_                                                                                 |
+
+# Titre 1
+
+## Titre 2
+
+### Titre 3
+
+#### Titre 4
+
+##### Titre 5
+
+###### Titre 6
+
+> Ceci est une **zone en retrait**.
+> La zone continue ici
+
+> Ceci est une autre **zone de retrait**.
+> Cette zone continue également dans la ligne suivante.
+> Cependan, cette ligne n’est plus en retrait
+
+- Liste1
+- Liste 2
+- Liste 3
+
+1. Liste 1
+2. Liste 2
+3. Liste 3
+
+[ ] A
+[x] B
+[ ] C
+
+C’est le `code`.
+
+```html
+<html>
+  <head> </head>
+</html>
+```
+
+---
+
+~~Strikethrough~~ <s>Strikethrough (when enable html tag decode.)</s>
+_Italic_ _Italic_
+**Emphasis** **Emphasis**
+**_Emphasis Italic_** **_Emphasis Italic_**
+
+Superscript: X<sub>2</sub>，Subscript: O<sup>2</sup>
+
+**Abbreviation(link HTML abbr tag)**
+
+The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.
+
+### Blockquotes
+
+> Blockquotes
+
+Paragraphs and Line Breaks
+
+> "Blockquotes Blockquotes", [Link](http://localhost/)。
+
+### Links
+
+[Links](http://localhost/)
+
+[Links with title](http://localhost/ "link title")
+
+[Reference link][id/name]
+
+[id/name]: http://link-url/
+
+GFM a-tail link @pandao
+
+### Code Blocks (multi-language) & highlighting
+
+#### Inline code
+
+`$ npm install marked`
+
+#### Code Blocks (Indented style)
+
+Indented 4 spaces, like `<pre>` (Preformatted Text).
+
+```php
+<?php
+        echo "Hello world!";
+    ?>
+```
+
+Code Blocks (Preformatted text):
+
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+#### Javascript
+
+```javascript
+function test() {
+  console.log("Hello world!");
+}
+
+(function () {
+  var box = function () {
+    return box.fn.init();
+  };
+
+  box.prototype = box.fn = {
+    init: function () {
+      console.log("box.init()");
+
+      return this;
+    },
+
+    add: function (str) {
+      alert("add", str);
+
+      return this;
+    },
+
+    remove: function (str) {
+      alert("remove", str);
+
+      return this;
+    },
+  };
+
+  box.fn.init.prototype = box.fn;
+
+  window.box = box;
+})();
+
+var testBox = box();
+testBox.add("jQuery").remove("jQuery");
+```
+
+#### HTML code
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <mate charest="utf-8" />
+    <title>Hello world!</title>
+  </head>
+  <body>
+    <h1>Hello world!</h1>
+  </body>
+</html>
+```
+
+---
+
+### Lists
+
+#### Unordered list (-)
+
+- Item A
+- Item B
+- Item C
+
+#### Unordered list (\*)
+
+- Item A
+- Item B
+- Item C
+
+#### Unordered list (plus sign and nested)
+
+- Item A
+- Item B
+  - Item B 1
+  - Item B 2
+  - Item B 3
+- Item C
+  - Item C 1
+  - Item C 2
+  - Item C 3
+
+#### Ordered list
+
+1. Item A
+2. Item B
+3. Item C
+
+---
+
+### Tables
+
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+| Function name | Description                |
+| ------------- | -------------------------- |
+| `help()`      | Display the help window.   |
+| `destroy()`   | **Destroy your computer!** |
+
+| Item     | Value |
+| -------- | ----: |
+| Computer | $1600 |
+| Phone    |   $12 |
+| Pipe     |    $1 |
+
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ | :-------------: | ------------: |
+| col 3 is      | some wordy text |         $1600 |
+| col 2 is      |    centered     |           $12 |
+| zebra stripes |    are neat     |            $1 |
